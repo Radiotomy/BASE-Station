@@ -4,7 +4,7 @@
 
 BASE Station is a cutting-edge audio streaming platform that combines the power of Audius API with professional audio controls and AI-driven music analysis. Stream unlimited tracks from independent artists, fine-tune your sound with studio-grade tools, and support creators directly on Base blockchain.
 
-![BASE Station](https://via.placeholder.com/800x400?text=BASE+Station)
+![BASE Station] ([https://ohara.ai/mini-apps/a378aed8-c724-4ddb-93ae-99c8bd084919])
 
 ## ✨ Features
 
