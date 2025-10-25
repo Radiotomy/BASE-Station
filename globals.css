@@ -1,0 +1,479 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  /* Mobile-specific utilities */
+  .pt-safe {
+    padding-top: max(env(safe-area-inset-top), 1rem);
+  }
+  
+  .pb-safe {
+    padding-bottom: max(env(safe-area-inset-bottom), 1rem);
+  }
+  
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+  
+  .touch-none {
+    touch-action: none;
+  }
+  
+  /* Smooth scrolling for mobile */
+  .mobile-scroll {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+  
+  /* Fixed bottom bar for mobile navigation */
+  .bottom-nav-safe {
+    padding-bottom: max(env(safe-area-inset-bottom), 0.5rem);
+  }
+  
+  /* Improve touch target sizes for mobile */
+  @media (max-width: 768px) {
+    button, a, [role="button"], .touch-target {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Larger text for readability */
+    body {
+      font-size: 16px;
+      -webkit-text-size-adjust: 100%;
+    }
+    
+    /* Prevent zoom on focus */
+    input, textarea, select {
+      font-size: 16px;
+    }
+  }
+  
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Professional Audio Equipment Theme */
+:root {
+  /* Studio Equipment Colors */
+  --studio-black: 0 0% 8%;              /* Deep black background */
+  --studio-charcoal: 0 0% 12%;          /* Charcoal gray */
+  --studio-metal: 0 0% 18%;             /* Metal surface */
+  --studio-metal-light: 0 0% 25%;       /* Lighter metal */
+  --studio-silver: 0 0% 70%;            /* Silver accents */
+  
+  /* Professional LED Colors - BASE Theme */
+  --led-red: 0 85% 55%;                 /* Clip/Peak indicator */
+  --led-yellow: 45 95% 55%;             /* Warning level */
+  --led-green: 140 75% 45%;             /* Active/Normal */
+  --led-blue: 232 100% 50%;             /* Coinbase Blue #0052FF */
+  --led-cyan: 224 100% 70%;             /* Lighter Blue #6997FF */
+  --led-purple: 262 100% 50%;           /* Purple #5200FF */
+  --led-off: 0 0% 20%;                  /* Inactive LED */
+  
+  /* VU Meter Colors */
+  --vu-green: 140 75% 45%;
+  --vu-yellow: 45 95% 55%;
+  --vu-red: 0 85% 55%;
+  
+  /* Glass Effects */
+  --glass-bg: rgba(18, 18, 18, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.03);
+  
+  /* Semantic Colors - BASE Theme */
+  --background: 0 0% 6%;
+  --foreground: 0 0% 95%;
+  --card: 0 0% 10%;
+  --card-foreground: 0 0% 95%;
+  --popover: 0 0% 10%;
+  --popover-foreground: 0 0% 95%;
+  --primary: 232 100% 50%;              /* Coinbase Blue */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 0 0% 20%;
+  --secondary-foreground: 0 0% 95%;
+  --muted: 0 0% 15%;
+  --muted-foreground: 0 0% 60%;
+  --accent: 224 100% 70%;               /* Lighter Blue */
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 85% 55%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 18%;
+  --input: 0 0% 15%;
+  --ring: 232 100% 50%;
+  --radius: 0.5rem;
+  
+  /* Chart colors - BASE Theme */
+  --chart-1: 232 100% 50%;              /* Coinbase Blue */
+  --chart-2: 224 100% 70%;              /* Lighter Blue */
+  --chart-3: 262 100% 50%;              /* Purple */
+  --chart-4: 140 75% 45%;               /* Green */
+  --chart-5: 45 95% 55%;                /* Yellow */
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  }
+  
+  /* Custom scrollbar - Studio style */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: hsl(var(--studio-charcoal));
+    border-left: 1px solid hsl(var(--border));
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--studio-metal));
+    border-radius: 0;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--studio-metal-light));
+  }
+}
+
+/* Professional Studio Background */
+.bg-studio {
+  background: linear-gradient(
+    180deg,
+    hsl(var(--studio-black)) 0%,
+    hsl(var(--studio-charcoal)) 100%
+  );
+}
+
+.bg-studio-radial {
+  background: radial-gradient(
+    ellipse at top,
+    hsl(var(--studio-charcoal)) 0%,
+    hsl(var(--studio-black)) 100%
+  );
+}
+
+/* Rack Equipment Panel */
+.rack-panel {
+  background: linear-gradient(
+    180deg,
+    hsl(var(--studio-metal)) 0%,
+    hsl(var(--studio-charcoal)) 50%,
+    hsl(var(--studio-metal)) 100%
+  );
+  border: 1px solid hsl(var(--border));
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.5),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Metal Surface Effect */
+.metal-surface {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--studio-metal-light)) 0%,
+    hsl(var(--studio-metal)) 50%,
+    hsl(var(--studio-charcoal)) 100%
+  );
+  border: 1px solid hsl(var(--border));
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* Glass morphism - Studio Edition */
+.glass-studio {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.02),
+    0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.glass-studio-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-studio-hover:hover {
+  background: rgba(28, 28, 28, 0.9);
+  border-color: hsl(var(--led-blue) / 0.3);
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.02),
+    0 4px 16px rgba(0, 0, 0, 0.4),
+    0 0 20px hsl(var(--led-blue) / 0.2);
+}
+
+/* LED Indicator */
+.led-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: relative;
+  background: hsl(var(--led-off));
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.5),
+    0 0 2px rgba(0, 0, 0, 0.8);
+}
+
+.led-active {
+  background: hsl(var(--led-green));
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    0 0 8px hsl(var(--led-green) / 0.8),
+    0 0 12px hsl(var(--led-green) / 0.4);
+}
+
+.led-blue {
+  background: hsl(var(--led-blue));
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    0 0 8px hsl(var(--led-blue) / 0.8),
+    0 0 12px hsl(var(--led-blue) / 0.4);
+}
+
+.led-red {
+  background: hsl(var(--led-red));
+  box-shadow: 
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    0 0 8px hsl(var(--led-red) / 0.8),
+    0 0 12px hsl(var(--led-red) / 0.4);
+}
+
+/* LED Pulse Animation */
+@keyframes led-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.led-pulse {
+  animation: led-pulse 1.5s ease-in-out infinite;
+}
+
+/* VU Meter Bar */
+.vu-meter {
+  height: 6px;
+  background: hsl(var(--studio-charcoal));
+  border-radius: 3px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.8);
+  position: relative;
+}
+
+.vu-meter-fill {
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--vu-green)) 0%,
+    hsl(var(--vu-green)) 60%,
+    hsl(var(--vu-yellow)) 80%,
+    hsl(var(--vu-red)) 100%
+  );
+  transition: width 0.1s ease-out;
+  box-shadow: 0 0 8px currentColor;
+}
+
+/* Professional Text Styles */
+.text-pro {
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.text-tech {
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+/* Studio Button */
+.btn-studio {
+  background: linear-gradient(
+    180deg,
+    hsl(var(--studio-metal-light)) 0%,
+    hsl(var(--studio-metal)) 100%
+  );
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  font-family: 'Monaco', 'Menlo', 'Consolas', monospace;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.btn-studio:hover {
+  background: linear-gradient(
+    180deg,
+    hsl(var(--studio-metal-light)) 0%,
+    hsl(var(--studio-metal)) 100%
+  );
+  border-color: hsl(var(--led-blue));
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.4),
+    0 0 12px hsl(var(--led-blue) / 0.3);
+}
+
+.btn-studio:active {
+  box-shadow: 
+    inset 0 2px 4px rgba(0, 0, 0, 0.4),
+    0 1px 2px rgba(0, 0, 0, 0.2);
+  transform: translateY(1px);
+}
+
+/* Active Button State */
+.btn-studio-active {
+  background: hsl(var(--led-blue));
+  border-color: hsl(var(--led-blue));
+  color: white;
+  box-shadow: 
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 0 16px hsl(var(--led-blue) / 0.6);
+}
+
+/* Track Item - Professional Style */
+.track-item-pro {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--studio-charcoal)) 0%,
+    hsl(var(--studio-black)) 100%
+  );
+  border: 1px solid hsl(var(--border));
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.track-item-pro:hover {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--studio-metal)) 0%,
+    hsl(var(--studio-charcoal)) 100%
+  );
+  border-left-color: hsl(var(--led-blue));
+}
+
+.track-item-pro-active {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--studio-metal)) 0%,
+    hsl(var(--studio-charcoal)) 100%
+  );
+  border-left-color: hsl(var(--led-green));
+  box-shadow: inset 3px 0 8px hsl(var(--led-green) / 0.2);
+}
+
+/* Animated gradient for logo - BASE Theme */
+.gradient-text-studio {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--led-blue)),
+    hsl(var(--led-cyan)),
+    hsl(var(--led-purple)),
+    hsl(var(--led-cyan)),
+    hsl(var(--led-blue))
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-size: 200% auto;
+  animation: gradient-shift 6s linear infinite;
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+/* Spectrum Display Panel */
+.spectrum-panel {
+  background: hsl(var(--studio-black));
+  border: 2px solid hsl(var(--studio-metal));
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.8),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Rack Screw Details */
+.rack-screw {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 30%,
+    hsl(var(--studio-silver)) 0%,
+    hsl(var(--studio-metal)) 100%
+  );
+  box-shadow: 
+    inset 0 1px 2px rgba(0, 0, 0, 0.5),
+    0 1px 0 rgba(255, 255, 255, 0.1);
+  position: relative;
+}
+
+.rack-screw::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.4);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.rack-screw::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1px;
+  height: 70%;
+  background: rgba(0, 0, 0, 0.4);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+/* Smooth transitions */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Focus states for accessibility */
+button:focus-visible,
+input:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid hsl(var(--led-blue));
+  outline-offset: 2px;
+}
